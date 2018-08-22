@@ -3,9 +3,10 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const spawn = require('child_process').spawn;
+var fs = require('fs');
 
 module.exports = (env, args) => {
-  const merge = env.production; // false
+  const merge = true;//env.production; // false
   const url = env.production ? 'https://unpkg.com' : '/node_modules';
   return {
     entry: {
@@ -13,9 +14,9 @@ module.exports = (env, args) => {
     },
     target: 'web',
     output: {
-      path: path.join(__dirname, '/'),
+      path: path.join(__dirname, '../cms/public'),
       //publicPath: path.join(__dirname, '/assets/'),
-      publicPath: env.production ? undefined : 'http://localhost:8080/',
+      publicPath: env.production ? undefined : 'http://localhost/',
       filename: '[name].bundle.js',
       chunkFilename: '[id].bundle.js',
       pathinfo: false
@@ -29,28 +30,28 @@ module.exports = (env, args) => {
         {
           test: /\.tsx?$/,
           use:
-          {
-            loader: 'ts-loader',
-            options: {
-              experimentalWatchApi: true,
-              transpileOnly: true //HMR doesn't work without this
+            {
+              loader: 'ts-loader',
+              options: {
+                experimentalWatchApi: true,
+                transpileOnly: true //HMR doesn't work without this
+              }
             }
-          }
         },
         {
           test: /\.css$/,
           use: ['style-loader', 'css-loader']
         },
         {
-          test: /\.(woff|woff2)$/,
-          use: 
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[path][name].[ext]',
-              outputPath: 'assets/'
+          test: /\.(woff|woff2|png|jpg|svg|ico)$/,
+          use:
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[path][name].[ext]'//,
+                //outputPath: '../cms/public'//path.join(__dirname, '../cms/public/resources')
+              }
             }
-          }
         },
         {
           test: /\.(bin)$/,
@@ -90,7 +91,7 @@ module.exports = (env, args) => {
         filename: 'index.html',
         title: `InkoSaga's Blog`,
         minify: true,
-        //favicon: 'favicon.ico',
+        favicon: path.join(__dirname, 'resources/favicon.ico'),//'favicon.ico',
         inject: false,
         template: require('html-webpack-template'),
         appMountId: 'app',
@@ -146,10 +147,26 @@ module.exports = (env, args) => {
       ignored: /(node_modules)/
     },
     devServer: {
-      port: 8080,
+      port: 80,
+      contentBase: path.join(__dirname, '../cms/public'),
       stats: 'errors-only',
       historyApiFallback: true,
-      hot: true
+      hot: true,
+      proxy: {
+        '/': {
+          target: 'http://localhost:1337',
+          //bypass: function (req, res, proxyOptions) {
+          //  console.log(`${req.url.replace(/\//g, '\\')}`);
+          //  console.log(`../../www${req.url.replace(/\//g, '\\')}`);
+          //  if (fs.existsSync(`${path.join(__dirname, '')}${req.url.replace(/\//g, '\\')}`)) {
+          //    return `../../www${req.url.replace(/\//g, '\\')}`;
+          //    //return req.url.replace(/\//g, '\\');
+          //  } else {
+          //    return false;
+          //  }
+          //}
+        }
+      }
     }
   }
 };
