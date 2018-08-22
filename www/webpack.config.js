@@ -14,7 +14,7 @@ module.exports = (env, args) => {
     },
     target: 'web',
     output: {
-      path: path.join(__dirname, '../cms/public'),
+      path: path.join(__dirname),
       //publicPath: path.join(__dirname, '/assets/'),
       publicPath: env.production ? undefined : 'http://localhost/',
       filename: '[name].bundle.js',
@@ -148,24 +148,13 @@ module.exports = (env, args) => {
     },
     devServer: {
       port: 80,
-      contentBase: path.join(__dirname, '../cms/public'),
+      contentBase: path.join(__dirname),
       stats: 'errors-only',
-      historyApiFallback: true,
       hot: true,
-      proxy: {
-        '/': {
-          target: 'http://localhost:1337',
-          //bypass: function (req, res, proxyOptions) {
-          //  console.log(`${req.url.replace(/\//g, '\\')}`);
-          //  console.log(`../../www${req.url.replace(/\//g, '\\')}`);
-          //  if (fs.existsSync(`${path.join(__dirname, '')}${req.url.replace(/\//g, '\\')}`)) {
-          //    return `../../www${req.url.replace(/\//g, '\\')}`;
-          //    //return req.url.replace(/\//g, '\\');
-          //  } else {
-          //    return false;
-          //  }
-          //}
-        }
+      historyApiFallback: {
+        rewrites: [
+          { from: /./, to: 'index.html' }
+        ]
       }
     }
   }
