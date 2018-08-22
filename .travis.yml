@@ -13,6 +13,6 @@ before_install:
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 after_success:
 - chmod 600 ~/.ssh/id_rsa
-- ssh travis@89.208.245.64 -p 26365 -o StrictHostKeyChecking=no 'cd ~/blog && git pull && cd www && npm install && npm run build'
+- ssh travis@89.208.245.64 -p 26365 -o StrictHostKeyChecking=no 'cd ~/blog && git pull && cd www && npm install && npm run build && sudo /usr/bin/systemctl restart strapi.service'
 addons:
   ssh_known_hosts: 89.208.245.64
