@@ -12,7 +12,7 @@
         "password": ""
       },
       "options": {
-        "authenticationDatabase": "admin",
+        "authenticationDatabase": "",
         "ssl": false
       }
     }
