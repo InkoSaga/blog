@@ -14,6 +14,6 @@ before_install:
 after_success:
 - chmod 600 ~/.ssh/id_rsa
 - ssh travis@89.208.245.64 -p 26365 -o StrictHostKeyChecking=no 'cd ~/blog && git pull && npm
-  install && npm run build && service strapi restart && service caddy restart'
+  install && npm run build && systemctl restart strapi.service && systemctl restart caddy.service'
 addons:
   ssh_known_hosts: 89.208.245.64
