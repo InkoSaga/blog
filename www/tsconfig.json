@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "outDir": "./assets/", 
+        "sourceMap": true, 
+        "strictNullChecks": true,
+        "module": "esnext",
+        "jsx": "react", 
+        "target": "es6", 
+        "esModuleInterop": true,
+        "allowJs": true, 
+        "noImplicitAny": false, 
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "skipLibCheck": true
+    },
+    "include": [
+        "./src/"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+}

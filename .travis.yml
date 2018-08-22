@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+- lts/*
+branchs:
+  only:
+  - master
+install:
+- npm install
+script:
+- npm run build
+before_install:
+- chmod 700 ~/.ssh && touch ~/.ssh/id_rsa && openssl aes-256-cbc -K $encrypted_c7089b572057_key -iv $encrypted_c7089b572057_iv
+  -in id_rsa.enc -out ~/.ssh/id_rsa -d
+after_success:
+- chmod 600 ~/.ssh/id_rsa
+- ssh travis@89.208.245.64 -p 26365 -o StrictHostKeyChecking=no 'cd ~/blog && git pull && npm
+  install && npm run build'
+addons:
+  ssh_known_hosts: 89.208.245.64
