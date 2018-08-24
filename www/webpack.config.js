@@ -16,7 +16,7 @@ module.exports = (env, args) => {
     output: {
       path: path.join(__dirname),
       //publicPath: path.join(__dirname, '/assets/'),
-      publicPath: env.production ? "https://cocatiel.co" : 'http://localhost/',
+      publicPath: env.production ? "https://cocatiel.co/" : 'http://localhost/',
       filename: '[name].bundle.js',
       chunkFilename: '[id].bundle.js',
       pathinfo: false

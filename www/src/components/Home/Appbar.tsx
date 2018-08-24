@@ -69,7 +69,7 @@ export class Component extends React.PureComponent<WithStyles<keyof ReturnType<t
                         <AppsIcon />
                     </MenuItem>
                 </Link>
-                <img className={this.props.classes.appbarLogo} src={require('../../../resources/logo.png')} height={48} />
+                <img className={this.props.classes.appbarLogo} src='/resources/logo.png' height={48} />
                 {isMobile() ? null :
                     <div className={this.props.classes.appbarSearch}>
                         <TextField type='text' placeholder='搜索 / Search' onBlur={this.onSearchChange} />
