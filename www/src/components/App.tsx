@@ -70,13 +70,6 @@ const styles = (theme: Theme) => ({
 
 export class Component extends React.PureComponent<WithStyles<keyof ReturnType<typeof styles>> & ReturnType<ReturnType<typeof mapStateToProps>> & ReturnType<ReturnType<typeof mapDispatchToProps>>> {
 
-  componentDidMount() {
-    const base = document.getElementsByTagName("base")[0];
-    if(base) {
-      base.remove();
-    } // browser router hack
-  }
-
   renderContent = () =>
     <div className={isMobile() ? this.props.classes.contentContainerMobile : this.props.classes.contentContainer}>
       <Switch>
@@ -95,7 +88,7 @@ export class Component extends React.PureComponent<WithStyles<keyof ReturnType<t
       <div className={this.props.classes.root}>
         <Appbar />
         <NavMenu />
-        {this.renderContent()}
+        
         {isMobile() ? null : <SidePanel />}
       </div>
     );
