@@ -10,7 +10,7 @@ module.exports = (env, args) => {
   const url = env.production ? 'https://unpkg.com' : '/node_modules';
   return {
     entry: {
-      index: './src/index.tsx'
+      index: ['babel-polyfill', './src/index.tsx']
     },
     target: 'web',
     output: {
@@ -30,13 +30,25 @@ module.exports = (env, args) => {
         {
           test: /\.tsx?$/,
           use:
-            {
-              loader: 'ts-loader',
-              options: {
-                experimentalWatchApi: true,
-                transpileOnly: true //HMR doesn't work without this
-              }
+          {
+            loader: 'ts-loader',
+            options: {
+              experimentalWatchApi: true,
+              transpileOnly: true //HMR doesn't work without this
             }
+          }
+        },
+        {
+          test: /\.js$/,
+          include: [
+            path.resolve('node_modules/strapi-sdk-javascript')
+          ],
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          }
         },
         {
           test: /\.css$/,
@@ -45,13 +57,13 @@ module.exports = (env, args) => {
         {
           test: /\.(woff|woff2|png|jpg|svg|ico)$/,
           use:
-            {
-              loader: 'file-loader',
-              options: {
-                name: '[path][name].[ext]'//,
-                //outputPath: '../cms/public'//path.join(__dirname, '../cms/public/resources')
-              }
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]'//,
+              //outputPath: '../cms/public'//path.join(__dirname, '../cms/public/resources')
             }
+          }
         },
         {
           test: /\.(bin)$/,

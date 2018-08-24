@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import Link from './Common/Link'
 
-//import Cms from './Common/Cms';
+import Cms from './Common/Cms';
 
 const toDateString = (time: Date) => time.toLocaleDateString('zh-Hans-CN', { year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -80,13 +80,13 @@ class ArticleList extends React.PureComponent<WithStyles<keyof ReturnType<typeof
 
     componentDidMount() {
         //Cms.clearToken();
-        //this.fetchSummary(this.props.category);
+        this.fetchSummary(this.props.category);
     }
 
-    //fetchSummary = category =>
-    //    Cms.getEntries('summary', {category: category, _sort: 'createdAt:desc', _limit: 10})
-    //    .then(articles => this.props.fetchSummaries(articles))
-    //    .catch(console.warn);
+    fetchSummary = category =>
+        Cms.getEntries('summary', {category: category, _sort: 'createdAt:desc', _limit: 10})
+        .then(articles => this.props.fetchSummaries(articles))
+        .catch(console.warn);
 
     Item = props =>
         <Grid item xs={12}>
