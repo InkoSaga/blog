@@ -86,8 +86,7 @@ export class Component extends React.PureComponent<WithStyles<keyof ReturnType<t
   render() {
     return (
       <div className={this.props.classes.root}>
-        <Appbar />
-        {isMobile() ? null : <SidePanel />}
+        fuck samsung
       </div>
     );
   }
