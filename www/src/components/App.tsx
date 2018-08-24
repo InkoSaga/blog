@@ -88,7 +88,7 @@ export class Component extends React.PureComponent<WithStyles<keyof ReturnType<t
       <div className={this.props.classes.root}>
         <Appbar />
         <NavMenu />
-        
+        {this.renderContent()}
         {isMobile() ? null : <SidePanel />}
       </div>
     );

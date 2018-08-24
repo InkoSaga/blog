@@ -23,7 +23,7 @@ prepareBackground().then(() => {
       <ConnectedRouter history={history}>
         <MuiThemeProvider theme={darkTheme}>
           <CssBaseline />
-          <App />
+          <div>fuck samsung</div>
         </MuiThemeProvider>
       </ConnectedRouter>
     </Provider>,
