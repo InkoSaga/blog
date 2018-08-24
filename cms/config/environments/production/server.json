@@ -2,7 +2,7 @@
   "host": "localhost",
   "port": "${process.env.PORT || 1337}",
   "autoReload": {
-    "enabled": false
+    "enabled": true
   },
   "cron": {
     "enabled": false

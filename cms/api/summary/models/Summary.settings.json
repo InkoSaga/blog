@@ -1,0 +1,25 @@
+{
+  "connection": "default",
+  "collectionName": "summary",
+  "info": {
+    "name": "summary",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "json"
+    },
+    "summary": {
+      "type": "text"
+    },
+    "category": {
+      "type": "string"
+    }
+  }
+}

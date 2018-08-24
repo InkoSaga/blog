@@ -135,6 +135,9 @@ module.exports = (env, args) => {
       new ForkTsCheckerWebpackPlugin({
         watch: "./src/"
       }),
+      new webpack.DefinePlugin({
+        __API__: env.production ? '"https://cms.cocatiel.co"' : '"http://localhost:1337"'
+      })
       //{
       //  apply: compiler =>
       //    compiler.hooks.watchRun.tap('JestWatchPlugin', compilation =>

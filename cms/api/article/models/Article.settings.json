@@ -1,0 +1,25 @@
+{
+  "connection": "default",
+  "collectionName": "article",
+  "info": {
+    "name": "article",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "json"
+    },
+    "content": {
+      "type": "text"
+    },
+    "category": {
+      "type": "string"
+    }
+  }
+}

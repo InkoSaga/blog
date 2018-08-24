@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import Link from './Common/Link'
 
-import axios from 'axios';
+import Cms from './Common/Cms';
 
 const toDateString = (time: Date) => time.toLocaleDateString('zh-Hans-CN', { year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -20,7 +20,7 @@ const mapReducerToStore = name => (state = {
     indexes: []
 }, action) => {
     switch (action.type) {
-        case `${name}-FETCH_INDEXES`:
+        case `${name}-FETCH_SUMMARIES`:
             return { ...state, indexes: action.payload };
         default:
             return state;
@@ -33,7 +33,7 @@ const mapStateToProps = name => (state, ownProps) => ({
 });
 
 const mapDispatchToProps = name => dispatch => ({
-    fetchArticles: articles => dispatch({ type: `${name}-FETCH_INDEXES`, payload: articles }),
+    fetchSummaries: articles => dispatch({ type: `${name}-FETCH_SUMMARIES`, payload: articles }),
 });
 
 const styles = (theme: Theme) => ({
@@ -79,14 +79,14 @@ const styles = (theme: Theme) => ({
 class ArticleList extends React.PureComponent<WithStyles<keyof ReturnType<typeof styles>> & ReturnType<ReturnType<typeof mapStateToProps>> & ReturnType<ReturnType<typeof mapDispatchToProps>>> {
 
     componentDidMount() {
-        this.fetchIndex(this.props.category);
+        //Cms.clearToken();
+        this.fetchSummary(this.props.category);
     }
 
-    fetchIndex = category =>
-        axios.get(`${window.location.protocol}//${window.location.host}/articles/index.json`,{	headers: {'Content-Type': 'application/json','Cache-Control' : 'no-cache'}})
-            .then(result => result.data.filter(entry => entry.category === category))
-            .then(articles => this.props.fetchArticles(articles))
-            .catch(console.warn);
+    fetchSummary = category =>
+        Cms.getEntries('summary', {category: category, _sort: 'createdAt:desc', _limit: 10})
+        .then(articles => this.props.fetchSummaries(articles))
+        .catch(console.warn);
 
     Item = props =>
         <Grid item xs={12}>
@@ -97,9 +97,9 @@ class ArticleList extends React.PureComponent<WithStyles<keyof ReturnType<typeof
 
     Article = props =>
         <this.Item>
-            <Typography className={this.props.classes.heading} variant='subheading'><Link to={`/article/${props.name}`}>{props.name}</Link></Typography>
+            <Typography className={this.props.classes.heading} variant='subheading'><Link to={`/article/${props.title}`}>{props.title}</Link></Typography>
             <Divider />
-            <Typography className={this.props.classes.subHeading} variant='caption'>{toDateString(new Date(props.time))}
+            <Typography className={this.props.classes.subHeading} variant='caption'>{toDateString(new Date(props.createdAt))}
                 {props.tags.map((tag, key) =>
                     <Link key={key} to={`/tag/${tag}`}>
                         <Chip className={this.props.classes.tag} clickable color='primary' label={tag} />

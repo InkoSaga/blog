@@ -1,1 +1,47 @@
-{}
+{
+  "article": {
+    "attributes": {
+      "title": {
+        "appearance": ""
+      },
+      "tags": {
+        "appearance": ""
+      },
+      "content": {
+        "appearance": ""
+      },
+      "category": {
+        "appearance": ""
+      }
+    }
+  },
+  "summary": {
+    "attributes": {
+      "title": {
+        "appearance": ""
+      },
+      "tags": {
+        "appearance": ""
+      },
+      "summary": {
+        "appearance": ""
+      },
+      "category": {
+        "appearance": ""
+      }
+    }
+  },
+  "tag": {
+    "attributes": {
+      "tag": {
+        "appearance": ""
+      },
+      "article": {
+        "appearance": ""
+      },
+      "summary": {
+        "appearance": ""
+      }
+    }
+  }
+}

@@ -17,7 +17,7 @@ import 'prismjs/themes/prism-okaidia.css';
 
 const marked = require('marked');
 
-import axios from 'axios';
+import Cms from './Common/Cms';
 
 marked.Lexer.prototype.lex = function lex(src) {
     src = src.replace(/\r\n|\r/g, '\n').replace(/\t/g, '    ').replace(/\u2424/g, '\n');
@@ -268,29 +268,9 @@ export class ArticleViewer extends React.Component<WithStyles<keyof ReturnType<t
         source: ''
     };
 
-    commentContainer: React.RefObject<HTMLDivElement> = React.createRef()
-
-    initUtterance = () => {
-        document.head.insertAdjacentHTML(
-            'beforeend',
-            '<link rel="prefetch" href="https://utteranc.es/client.js" />'
-        );
-        document.head.insertAdjacentHTML(
-            'beforeend',
-            '<link rel="preload" href="https://utteranc.es/client.js" as="script" />'
-        );
-        const script = document.createElement('script');
-        script.src = 'https://utteranc.es/client.js';
-        script.async = true;
-        script.setAttribute('repo', 'inkosaga/inkosaga.github.io');
-        script.setAttribute('issue-term', (this.props as any).match.params.name);
-        this.commentContainer.current!.appendChild(script);
-    }
-
     componentDidMount() {
-        this.initUtterance();
-        axios.get(`${window.location.protocol}//${window.location.host}/articles/${(this.props as any).match.params.name}.md`, { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' } })
-            .then(result => this.setState({ source: result.data }))
+        Cms.getEntries('article', {title: (this.props as any).match.params.name})
+            .then(result => this.setState({ source: (result[0] as any).content }))
             .catch(console.warn);
     }
 
@@ -315,8 +295,6 @@ export class ArticleViewer extends React.Component<WithStyles<keyof ReturnType<t
                 <Grid item xs={12}>
                     <Paper square className={this.props.classes.paper}>
                         <div className={this.props.classes.root} dangerouslySetInnerHTML={{ __html: marked(this.state.source) }} />
-                        <Divider />
-                        <div ref={this.commentContainer} />
                     </Paper>
                 </Grid>
             </Grid >

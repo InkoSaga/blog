@@ -10,7 +10,6 @@ import { darkTheme, prepareBackground, background } from './Theme';
 import 'typeface-roboto';
 //import { BrowserRouter } from 'react-router-dom';
 
-
 const fullSize = (dom: HTMLElement) => {
   dom.style.width = '100%';
   dom.style.height = '100%';
