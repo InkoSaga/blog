@@ -19,14 +19,15 @@ const dom = document.getElementById('app') as HTMLElement;
 
 prepareBackground().then(() => {
   ReactDOM.render(
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <MuiThemeProvider theme={darkTheme}>
-          <CssBaseline />
-          <App />
-        </MuiThemeProvider>
-      </ConnectedRouter>
-    </Provider>,
+    //<Provider store={store}>
+    //  <ConnectedRouter history={history}>
+    //    <MuiThemeProvider theme={darkTheme}>
+    //      <CssBaseline />
+    //      <App />
+    //    </MuiThemeProvider>
+    //  </ConnectedRouter>
+    //</Provider>,
+    <div>fuck samsung</div>,
     dom
   );
   fullSize(document.documentElement);
