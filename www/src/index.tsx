@@ -29,6 +29,10 @@ prepareBackground().then(() => {
     </Provider>,
     dom
   );
+  const base = document.getElementsByTagName("base")[0];
+    if(base) {
+      base.remove();
+    } // browser router hack
   fullSize(document.documentElement);
   fullSize(document.body);
   fullSize(dom);
