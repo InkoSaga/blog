@@ -21,7 +21,7 @@ const chromeMediumLow = "#2b2b2b";
 const chromeMedium = "#1f1f1f";
 const chromeHigh ="#767676";
 
-const baseBackground = require('../resources/background.png');
+const baseBackground = '/resources/background.png';
 
 export let background = {
     acrylic0: `url(${baseBackground}) left top / 100% 100% no-repeat fixed`,
