@@ -123,8 +123,11 @@ module.exports = (env, args) => {
         <meta http-equiv="Cache-control" content="public">
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124024770-1"></script>
       <script type="text/javascript">
-      function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-124024770-1");
-      !function(i){if(i.search){var l={};i.search.slice(1).split("&").forEach(function(i){var a=i.split("=");l[a[0]]=a.slice(1).join("=").replace(/~and~/g,"&")}),void 0!==l.p&&window.history.replaceState(null,null,i.pathname.slice(0,-1)+(l.p||"")+(l.q?"?"+l.q:"")+i.hash)}}(window.location);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-124024770-1');
       </script>
         `,
         bodyHtmlSnippet: `
