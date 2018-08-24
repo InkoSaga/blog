@@ -16,7 +16,7 @@ module.exports = (env, args) => {
     output: {
       path: path.join(__dirname),
       //publicPath: path.join(__dirname, '/assets/'),
-      publicPath: env.production ? undefined : 'http://localhost/',
+      publicPath: env.production ? "https://cms.cocatiel.co" : 'http://localhost/',
       filename: '[name].bundle.js',
       chunkFilename: '[id].bundle.js',
       pathinfo: false
@@ -119,7 +119,6 @@ module.exports = (env, args) => {
           url + '/@tensorflow/tfjs/dist/tf.min.js'
         ],
         headHtmlSnippet: `
-        <base href="/" />
         <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1, maximum-scale=1, initial-scale=1, user-scalable=0" />
         <meta http-equiv="Cache-control" content="public">
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124024770-1"></script>
